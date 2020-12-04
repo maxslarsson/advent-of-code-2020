@@ -3,7 +3,6 @@ rustflags = ["-C", "target-cpu=native"]
 
 [profile.release]
 opt-level = 3
-incremental = true
-codegen-units = 16
+codegen-units = 1
 lto = true
-debug = true 
+strip = "symbols"

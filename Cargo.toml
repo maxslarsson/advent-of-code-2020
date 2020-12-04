@@ -1,3 +1,10 @@
-[workspace]
-members = ["*"]
-exclude = ["target", ".git", ".cargo"]
+cargo-features = ["strip"]
+
+[package]
+name = "advent_of_code"
+version = "0.1.0"
+authors = ["Max Larsson <maxslarsson@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+regex = "1.4.2"
