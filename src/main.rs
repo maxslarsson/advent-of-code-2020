@@ -1,6 +1,7 @@
 use std::env;
 use std::fs;
 use std::io;
+use std::io::prelude::*;
 use std::time::{Duration, Instant};
 
 use advent_of_code::{get_day, noop};
@@ -37,7 +38,8 @@ fn main() {
     if args.len() >= 2 {
         day = args[1].clone();
     } else {
-        println!("Enter day: ");
+        print!("Enter day: ");
+        io::stdout().flush().expect("Error flushing stdout");
         io::stdin()
             .read_line(&mut day)
             .expect("Failed to read line");

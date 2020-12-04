@@ -1,5 +1,4 @@
 fn setup(input: String) -> Vec<usize> {
-    // Convert input string to a Vec of usize
     return input
         .split("\n")
         .map(|elem| elem.parse::<usize>().unwrap())
@@ -10,12 +9,8 @@ pub fn part1(input: String) {
     let input = setup(input);
     let mut res = None;
 
-    for (ia, a) in input.iter().enumerate() {
-        for (ib, b) in input.iter().enumerate() {
-            if ia == ib {
-                continue;
-            }
-
+    for a in input.iter() {
+        for b in input.iter() {
             if a + b == 2020 {
                 res = Some((*a, *b));
                 break;
@@ -38,13 +33,9 @@ pub fn part2(input: String) {
     let input = setup(input);
     let mut res = None;
 
-    for (ia, a) in input.iter().enumerate() {
-        for (ib, b) in input.iter().enumerate() {
-            for (ic, c) in input.iter().enumerate() {
-                if (ia == ib) || (ib == ic) || (ic == ia) {
-                    continue;
-                }
-
+    for a in input.iter() {
+        for b in input.iter() {
+            for c in input.iter() {
                 if a + b + c == 2020 {
                     res = Some((*a, *b, *c));
                     break;
