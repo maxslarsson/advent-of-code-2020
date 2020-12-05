@@ -57,19 +57,24 @@ pub fn part2(input: String) {
     for passport in input {
         let res = panic::catch_unwind(|| {
             let byr = passport.get("byr").unwrap().parse().unwrap();
+
             if 1920 <= byr && byr <= 2002 {
                 let iyr = passport.get("iyr").unwrap().parse().unwrap();
+
                 if 2010 <= iyr && iyr <= 2020 {
                     let eyr = passport.get("eyr").unwrap().parse().unwrap();
+
                     if 2020 <= eyr && eyr <= 2030 {
                         let hgt = passport.get("hgt").unwrap();
                         let (hgt, units) = hgt.split_at(hgt.len() - 2);
                         let hgt = hgt.parse().unwrap();
+
                         if (units == "cm" && 150 <= hgt && hgt <= 193)
                             || (units == "in" && 59 <= hgt && hgt <= 76)
                         {
                             if HEX_RE.is_match(passport.get("hcl").unwrap()) {
                                 let ecl = passport.get("ecl").unwrap();
+
                                 if ecl == "amb"
                                     || ecl == "blu"
                                     || ecl == "brn"
