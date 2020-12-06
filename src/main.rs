@@ -39,7 +39,7 @@ fn main() {
         day = args[1].clone();
     } else {
         print!("Enter day: ");
-        io::stdout().flush().expect("Error flushing stdout");
+        io::stdout().flush().expect("Failed to flush stdout");
         io::stdin()
             .read_line(&mut day)
             .expect("Failed to read line");
