@@ -1,23 +1,16 @@
 use std::collections::HashMap;
 
-fn setup(input: String) -> Vec<String> {
-    return input.split("\n").map(|rule| rule.to_string()).collect()
-}
-
-pub fn part1(input: String) {
-    let input = setup(input);
-
+fn setup(input: String) -> HashMap<String, HashMap<String, usize>> {
     let mut map = HashMap::new();
-
-    for rule in input {
+    for rule in input.split("\n") {
         let mut words = rule.split(" ").peekable();
         let bag: Vec<_> = words.by_ref().take(2).collect();
 
         assert_eq!(bag.len(), 2);
-        
+
         // Get rid of word "bags"
         words.next();
-        
+
         let mut contained_bags = HashMap::new();
 
         loop {
@@ -31,35 +24,61 @@ pub fn part1(input: String) {
                 break;
             }
 
-            contained_bags.insert(coll[1..3].join(" "), coll[0].to_string());
+            contained_bags.insert(coll[1..3].join(" "), coll[0].parse().unwrap());
         }
 
         map.insert(bag.join(" "), contained_bags);
     }
 
-    println!("{}", recursive(&map, None));
+    return map;
 }
 
-fn recursive(map: &HashMap<String, HashMap<String, String>>, current: Option<&str>) -> usize {
+pub fn part1(input: String) {
+    let map = setup(input);
+
     let mut running = 0;
 
-    if current.is_none() {
-        for key in map.keys() {
-            running += recursive(map, Some(key));
+    for key in map.keys() {
+        if key == "shiny gold" {
+            continue;
         }
-    } else {
-        for key in map.get(current.unwrap()).unwrap().keys() {
-            if key == "shiny gold" {
-                return 1;
-            }
 
-            running += recursive(map, Some(key));
+        running += if recursion_part_1(map, key) { 1 } else { 0 }
+    }
+
+    println!("{}", running);
+}
+
+fn recursion_part_1(map: &HashMap<String, HashMap<String, usize>>, current: &str) -> bool {
+    if current == "shiny gold" {
+        return true;
+    }
+
+    for key in map.get(current).unwrap().keys() {
+        if recursion_part_1(map, key) {
+            return true;
         }
     }
 
-    return running;
+    return false;
 }
 
 pub fn part2(input: String) {
-    
+    let map = setup(input);
+
+    // Idk why -1 but it works
+    println!("{}", recursion_part_2(&map, "shiny gold") - 1);
+}
+
+fn recursion_part_2(map: &HashMap<String, HashMap<String, usize>>, current: &str) -> usize {
+    let iter = map.get(current).unwrap().keys().peekable();
+
+    let mut running = 1;
+    let local_map = map.get(current).unwrap();
+
+    for key in iter {
+        running += local_map.get(key).unwrap() * recursion_part_2(map, key);
+    }
+
+    return running;
 }
