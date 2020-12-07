@@ -43,7 +43,7 @@ pub fn part1(input: String) {
             continue;
         }
 
-        running += if recursion_part_1(map, key) { 1 } else { 0 }
+        running += if recursion_part_1(&map, key) { 1 } else { 0 }
     }
 
     println!("{}", running);
@@ -66,7 +66,7 @@ fn recursion_part_1(map: &HashMap<String, HashMap<String, usize>>, current: &str
 pub fn part2(input: String) {
     let map = setup(input);
 
-    // Idk why -1 but it works
+    // Subtract 1 because the bag DOES NOT contain itself
     println!("{}", recursion_part_2(&map, "shiny gold") - 1);
 }
 
