@@ -37,8 +37,8 @@ pub fn part2(input: String) {
         for person in group.split("\n") {
             for c in person.chars() {
                 // Default is 0 because 1 gets automatically added when it is inserted into the HashMap
-                let va = yes.get(&c).unwrap_or(&0) + 1;
-                yes.insert(c, luevalue);
+                let value = yes.get(&c).unwrap_or(&0) + 1;
+                yes.insert(c, value);
             }
         }
 
