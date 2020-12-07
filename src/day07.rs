@@ -27,11 +27,37 @@ pub fn part1(input: String) {
                 break;
             }
 
+            if coll == ["no", "other", "bags."] {
+                break;
+            }
+
             contained_bags.insert(coll[1..3].join(" "), coll[0].to_string());
         }
 
         map.insert(bag.join(" "), contained_bags);
     }
+
+    println!("{}", recursive(&map, None));
+}
+
+fn recursive(map: &HashMap<String, HashMap<String, String>>, current: Option<&str>) -> usize {
+    let mut running = 0;
+
+    if current.is_none() {
+        for key in map.keys() {
+            running += recursive(map, Some(key));
+        }
+    } else {
+        for key in map.get(current.unwrap()).unwrap().keys() {
+            if key == "shiny gold" {
+                return 1;
+            }
+
+            running += recursive(map, Some(key));
+        }
+    }
+
+    return running;
 }
 
 pub fn part2(input: String) {
