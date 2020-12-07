@@ -3,7 +3,7 @@ use std::collections::HashMap;
 fn setup(input: String) -> HashMap<String, HashMap<String, usize>> {
     let mut map = HashMap::new();
     for rule in input.split("\n") {
-        let mut words = rule.split(" ").peekable();
+        let mut words = rule.split(" ");
         let bag: Vec<_> = words.by_ref().take(2).collect();
 
         assert_eq!(bag.len(), 2);
@@ -66,14 +66,14 @@ fn recursion_part_1(map: &HashMap<String, HashMap<String, usize>>, current: &str
 pub fn part2(input: String) {
     let map = setup(input);
 
-    // Subtract 1 because the bag DOES NOT contain itself
-    println!("{}", recursion_part_2(&map, "shiny gold") - 1);
+    println!("{}", recursion_part_2(&map, "shiny gold"));
 }
 
 fn recursion_part_2(map: &HashMap<String, HashMap<String, usize>>, current: &str) -> usize {
-    let iter = map.get(current).unwrap().keys().peekable();
+    let iter = map.get(current).unwrap().keys();
 
-    let mut running = 1;
+    // Does not contain itself
+    let mut running = if current == "shiny gold" { 0 } else { 1 };
     let local_map = map.get(current).unwrap();
 
     for key in iter {
