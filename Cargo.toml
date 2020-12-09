@@ -1,8 +1,8 @@
 cargo-features = ["strip"]
 
 [package]
-name = "advent_of_code"
-version = "0.1.0"
+name = "advent-of-code-2020"
+version = "1.0.0"
 authors = ["Max Larsson <maxslarsson@gmail.com>"]
 edition = "2018"
 
