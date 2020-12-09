@@ -50,7 +50,7 @@ pub fn part2(input: String) {
     let index = 0;
     let accumulator = 0;
     
-    let mut visited_indexes = HashMap::new();
+    let visited_indexes = HashMap::new();
 
     println!("{}", recursive(index, accumulator, visited_indexes, &instructions, false));
 
