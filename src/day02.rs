@@ -1,7 +1,7 @@
 use regex::Regex;
 
-fn setup(input: String) -> (Vec<String>, Regex, Regex, Regex) {
-    let input = input.split("\n").map(|line| line.to_string()).collect();
+fn setup(input: &str) -> (Vec<&str>, Regex, Regex, Regex) {
+    let input = input.split("\n").collect();
 
     let leftright = Regex::new(r"\d+-\d+").unwrap();
     let letter = Regex::new(r"[A-z]:").unwrap();
@@ -11,7 +11,7 @@ fn setup(input: String) -> (Vec<String>, Regex, Regex, Regex) {
 }
 
 fn parse(
-    line: String,
+    line: &str,
     leftright: &Regex,
     letter: &Regex,
     sequence: &Regex,
@@ -37,7 +37,7 @@ fn parse(
 }
 
 pub fn part1(input: String) {
-    let (contents, leftright, letter, sequence) = setup(input);
+    let (contents, leftright, letter, sequence) = setup(&input);
     let mut valid = 0;
 
     for line in contents {
@@ -56,7 +56,7 @@ pub fn part1(input: String) {
 }
 
 pub fn part2(input: String) {
-    let (contents, leftright, letter, sequence) = setup(input);
+    let (contents, leftright, letter, sequence) = setup(&input);
     let mut valid = 0;
 
     for line in contents {

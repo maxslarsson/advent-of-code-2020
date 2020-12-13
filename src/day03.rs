@@ -1,4 +1,4 @@
-fn setup(input: String) -> Vec<Vec<char>> {
+fn setup(input: &str) -> Vec<Vec<char>> {
     return input.split("\n").map(|row| row.chars().collect()).collect();
 }
 
@@ -32,12 +32,12 @@ fn helper(map: &Vec<Vec<char>>, slope_right: usize, slope_left: usize) -> usize 
 }
 
 pub fn part1(input: String) {
-    let map = setup(input);
+    let map = setup(&input);
     println!("{}", helper(&map, 3, 1));
 }
 
 pub fn part2(input: String) {
-    let map = setup(input);
+    let map = setup(&input);
     let sum = helper(&map, 1, 1)
         * helper(&map, 1, 2)
         * helper(&map, 3, 1)

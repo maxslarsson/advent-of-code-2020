@@ -1,12 +1,12 @@
-fn setup(input: String) -> Vec<usize> {
+fn setup(input: &str) -> Vec<usize> {
     return input
         .split("\n")
-        .map(|elem| elem.parse::<usize>().unwrap())
+        .map(|elem| elem.parse().unwrap())
         .collect();
 }
 
 pub fn part1(input: String) {
-    let input = setup(input);
+    let input = setup(&input);
     let mut res = None;
 
     for a in input.iter() {
@@ -30,7 +30,7 @@ pub fn part1(input: String) {
 }
 
 pub fn part2(input: String) {
-    let input = setup(input);
+    let input = setup(&input);
     let mut res = None;
 
     for a in input.iter() {

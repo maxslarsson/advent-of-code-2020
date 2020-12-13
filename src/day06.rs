@@ -1,11 +1,11 @@
 use std::collections::{HashMap, HashSet};
 
-fn setup(input: String) -> Vec<String> {
-    return input.split("\n\n").map(|group| group.to_string()).collect();
+fn setup(input: &str) -> Vec<&str> {
+    return input.split("\n\n").collect();
 }
 
 pub fn part1(input: String) {
-    let input = setup(input);
+    let input = setup(&input);
 
     let mut groups = Vec::new();
 
@@ -25,7 +25,7 @@ pub fn part1(input: String) {
 }
 
 pub fn part2(input: String) {
-    let input = setup(input);
+    let input = setup(&input);
 
     let mut groups = Vec::new();
 

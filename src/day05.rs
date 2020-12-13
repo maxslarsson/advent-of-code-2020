@@ -1,10 +1,10 @@
 use std::cmp;
 
-fn setup(input: String) -> Vec<String> {
-    return input.split("\n").map(|line| line.to_string()).collect();
+fn setup(input: &str) -> Vec<&str> {
+    return input.split("\n").collect();
 }
 
-fn calculate_seat_ids(input: Vec<String>) -> Vec<usize> {
+fn calculate_seat_ids(input: Vec<&str>) -> Vec<usize> {
     let mut calculated_rows = Vec::new();
     let mut calculated_columns = Vec::new();
 
@@ -39,7 +39,7 @@ fn calculate_seat_ids(input: Vec<String>) -> Vec<usize> {
 }
 
 pub fn part1(input: String) {
-    let input = setup(input);
+    let input = setup(&input);
 
     let seat_ids = calculate_seat_ids(input);
 
@@ -47,7 +47,7 @@ pub fn part1(input: String) {
 }
 
 pub fn part2(input: String) {
-    let input = setup(input);
+    let input = setup(&input);
 
     let mut seat_ids = calculate_seat_ids(input);
 

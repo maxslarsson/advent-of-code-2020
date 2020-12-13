@@ -3,7 +3,7 @@ use regex::Regex;
 use std::collections::HashMap;
 use std::panic;
 
-fn setup(input: String) -> Vec<HashMap<String, String>> {
+fn setup(input: &str) -> Vec<HashMap<&str, &str>> {
     // let mut passports: Vec<Vec<HashMap<String, String>>> =
     //     Vec::with_capacity(input.split("\n\n").count());
 
@@ -13,10 +13,7 @@ fn setup(input: String) -> Vec<HashMap<String, String>> {
         passports.push(HashMap::new());
         for field in passport.split([' ', '\n'].as_ref()) {
             let pair: Vec<&str> = field.split(":").collect();
-            passports
-                .last_mut()
-                .unwrap()
-                .insert(pair[0].to_string(), pair[1].to_string());
+            passports.last_mut().unwrap().insert(pair[0], pair[1]);
         }
     }
 
@@ -24,7 +21,7 @@ fn setup(input: String) -> Vec<HashMap<String, String>> {
 }
 
 pub fn part1(input: String) {
-    let input = setup(input);
+    let input = setup(&input);
 
     let mut valid_passports = 0;
 
@@ -40,7 +37,7 @@ pub fn part1(input: String) {
 }
 
 pub fn part2(input: String) {
-    let input = setup(input);
+    let input = setup(&input);
 
     panic::set_hook(Box::new(|_info| {
         // supresses the panic messages
@@ -75,13 +72,13 @@ pub fn part2(input: String) {
                             if HEX_RE.is_match(passport.get("hcl").unwrap()) {
                                 let ecl = passport.get("ecl").unwrap();
 
-                                if ecl == "amb"
-                                    || ecl == "blu"
-                                    || ecl == "brn"
-                                    || ecl == "gry"
-                                    || ecl == "grn"
-                                    || ecl == "hzl"
-                                    || ecl == "oth"
+                                if *ecl == "amb"
+                                    || *ecl == "blu"
+                                    || *ecl == "brn"
+                                    || *ecl == "gry"
+                                    || *ecl == "grn"
+                                    || *ecl == "hzl"
+                                    || *ecl == "oth"
                                 {
                                     if NINE_RE.is_match(passport.get("pid").unwrap()) {
                                         return 1;

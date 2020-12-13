@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 
-fn setup(input: String) -> HashMap<String, HashMap<String, usize>> {
+fn setup(input: &str) -> HashMap<String, HashMap<String, usize>> {
     let mut map = HashMap::new();
     for rule in input.split("\n") {
         let mut words = rule.split(" ");
@@ -34,7 +34,7 @@ fn setup(input: String) -> HashMap<String, HashMap<String, usize>> {
 }
 
 pub fn part1(input: String) {
-    let map = setup(input);
+    let map = setup(&input);
 
     let mut running = 0;
 
@@ -64,7 +64,7 @@ fn recursion_part_1(map: &HashMap<String, HashMap<String, usize>>, current: &str
 }
 
 pub fn part2(input: String) {
-    let map = setup(input);
+    let map = setup(&input);
 
     println!("{}", recursion_part_2(&map, "shiny gold"));
 }
