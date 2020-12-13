@@ -64,8 +64,8 @@ fn main() {
     let to_run = get_day(day_num);
     // Time it
     if to_run.0 != noop {
-        println!("Running Part 1");
         let input = input.clone();
+        println!("Running Part 1");
         let part1_start = Instant::now();
         to_run.0(input);
         let part1_dur = part1_start.elapsed();
@@ -73,8 +73,8 @@ fn main() {
     }
 
     if to_run.1 != noop {
-        println!("Running Part 2");
         let input = input.clone();
+        println!("Running Part 2");
         let part2_start = Instant::now();
         to_run.1(input);
         let part2_dur = part2_start.elapsed();
