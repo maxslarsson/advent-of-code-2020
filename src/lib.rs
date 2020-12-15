@@ -1,5 +1,6 @@
 #![feature(option_unwrap_none)]
 #![feature(drain_filter)]
+#![feature(bool_to_option)]
 
 // Days
 pub mod day01;
