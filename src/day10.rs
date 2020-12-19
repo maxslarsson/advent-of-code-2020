@@ -1,6 +1,6 @@
 fn setup(input: String) -> Vec<usize> {
     let mut input: Vec<usize> = input
-        .split("\n")
+        .split('\n')
         .map(|jolt| jolt.parse().unwrap())
         .collect();
 
@@ -12,7 +12,7 @@ fn setup(input: String) -> Vec<usize> {
     // The jolt of the device
     input.push(input.last().unwrap() + 3);
 
-    return input;
+    input
 }
 
 pub fn part1(input: String) {

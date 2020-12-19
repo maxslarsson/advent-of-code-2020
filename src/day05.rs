@@ -1,7 +1,7 @@
 use std::cmp;
 
 fn setup(input: &str) -> Vec<&str> {
-    return input.split("\n").collect();
+    return input.split('\n').collect();
 }
 
 fn calculate_seat_ids(input: Vec<&str>) -> Vec<usize> {
@@ -31,11 +31,11 @@ fn calculate_seat_ids(input: Vec<&str>) -> Vec<usize> {
         calculated_columns.push(columns[0]);
     }
 
-    return calculated_rows
+    calculated_rows
         .into_iter()
         .zip(calculated_columns)
         .map(|(row, column)| row * 8 + column)
-        .collect();
+        .collect()
 }
 
 pub fn part1(input: String) {
@@ -51,7 +51,7 @@ pub fn part2(input: String) {
 
     let mut seat_ids = calculate_seat_ids(input);
 
-    seat_ids.sort();
+    seat_ids.sort_unstable();
     seat_ids.dedup();
 
     let mut possible = Vec::new();
@@ -67,7 +67,7 @@ pub fn part2(input: String) {
         }
     }
 
-    possible.sort();
+    possible.sort_unstable();
     possible.dedup();
 
     println!("{}", possible[0]);

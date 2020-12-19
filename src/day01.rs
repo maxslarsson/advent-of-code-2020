@@ -1,6 +1,6 @@
 fn setup(input: &str) -> Vec<usize> {
     return input
-        .split("\n")
+        .split('\n')
         .map(|elem| elem.parse().unwrap())
         .collect();
 }

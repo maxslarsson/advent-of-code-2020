@@ -2,8 +2,8 @@ use std::collections::HashMap;
 
 fn setup(input: &str) -> HashMap<String, HashMap<String, usize>> {
     let mut map = HashMap::new();
-    for rule in input.split("\n") {
-        let mut words = rule.split(" ");
+    for rule in input.split('\n') {
+        let mut words = rule.split(' ');
         let bag: Vec<_> = words.by_ref().take(2).collect();
 
         assert_eq!(bag.len(), 2);
@@ -30,7 +30,7 @@ fn setup(input: &str) -> HashMap<String, HashMap<String, usize>> {
         map.insert(bag.join(" "), contained_bags);
     }
 
-    return map;
+    map
 }
 
 pub fn part1(input: String) {
@@ -60,7 +60,7 @@ fn recursion_part_1(map: &HashMap<String, HashMap<String, usize>>, current: &str
         }
     }
 
-    return false;
+    false
 }
 
 pub fn part2(input: String) {
@@ -80,5 +80,5 @@ fn recursion_part_2(map: &HashMap<String, HashMap<String, usize>>, current: &str
         running += local_map.get(key).unwrap() * recursion_part_2(map, key);
     }
 
-    return running;
+    running
 }

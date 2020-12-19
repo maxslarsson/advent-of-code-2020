@@ -15,7 +15,7 @@ where
     let input = setup(input);
 
     for action in input {
-        let c = action.chars().nth(0).unwrap();
+        let c = action.chars().next().unwrap();
         let amount: String = action.chars().skip(1).collect();
         let amount: isize = amount.parse().unwrap();
         match c {
@@ -34,7 +34,7 @@ where
 }
 
 fn setup(input: &str) -> Vec<&str> {
-    return input.split("\n").collect();
+    return input.split('\n').collect();
 }
 
 trait Actions {

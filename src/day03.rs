@@ -1,8 +1,8 @@
 fn setup(input: &str) -> Vec<Vec<char>> {
-    return input.split("\n").map(|row| row.chars().collect()).collect();
+    return input.split('\n').map(|row| row.chars().collect()).collect();
 }
 
-fn helper(map: &Vec<Vec<char>>, slope_right: usize, slope_left: usize) -> usize {
+fn helper(map: &[Vec<char>], slope_right: usize, slope_left: usize) -> usize {
     // Keep track of current location - (x, y)
     let mut location = (0, 0);
     // Keep track of number of trees encountered
@@ -28,7 +28,7 @@ fn helper(map: &Vec<Vec<char>>, slope_right: usize, slope_left: usize) -> usize 
         }
     }
 
-    return trees;
+    trees
 }
 
 pub fn part1(input: String) {

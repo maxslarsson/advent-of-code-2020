@@ -38,8 +38,8 @@ pub struct Layout {
 
 impl Layout {
     pub fn new(input: &str) -> Self {
-        let height = input.split("\n").count();
-        let width = input.split("\n").next().unwrap().len();
+        let height = input.split('\n').count();
+        let width = input.split('\n').next().unwrap().len();
         let seats = input
             .replace("\n", "")
             .chars()
@@ -125,7 +125,7 @@ impl Layout {
             }
         }
 
-        return count;
+        count
     }
 
     pub fn tick_part_2(&mut self) {
@@ -231,7 +231,7 @@ impl Layout {
             }
         }
 
-        return count;
+        count
     }
 
     pub fn is_repeating(&self) -> bool {
@@ -255,7 +255,7 @@ impl fmt::Display for Layout {
 
                 write!(f, "{}", symbol)?;
             }
-            write!(f, "\n")?;
+            writeln!(f)?;
         }
 
         Ok(())

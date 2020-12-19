@@ -1,6 +1,6 @@
 fn setup(input: &str) -> usize {
     let mut elements = Vec::new();
-    for line in input.split("\n") {
+    for line in input.split('\n') {
         let num: usize = line.parse().unwrap();
 
         if elements.len() < 25 {
@@ -45,7 +45,7 @@ pub fn part1(input: String) {
 pub fn part2(input: String) {
     let invalid = setup(&input);
 
-    let elements: Vec<_> = input.split("\n").collect();
+    let elements: Vec<_> = input.split('\n').collect();
     let elements: Vec<usize> = elements
         .into_iter()
         .map(|elem| elem.parse().unwrap())

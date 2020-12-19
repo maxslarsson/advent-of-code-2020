@@ -9,11 +9,11 @@ pub fn part1(input: String) {
     let re = Regex::new(r"mask = [X01]{36}(\nmem\[\d+\] = \d+)+").unwrap();
 
     for mat in re.find_iter(&input) {
-        let lines: Vec<_> = mat.as_str().split("\n").collect();
+        let lines: Vec<_> = mat.as_str().split('\n').collect();
         let bitmask = &lines[0][7..];
 
         for &mem in &lines[1..] {
-            let end = mem.find("=").unwrap();
+            let end = mem.find('=').unwrap();
             let loc: usize = mem[4..end - 2].parse().unwrap();
             let decimal: usize = mem[end + 2..].parse().unwrap();
 
@@ -41,11 +41,11 @@ pub fn part2(input: String) {
     let re = Regex::new(r"mask = [X01]{36}(\nmem\[\d+\] = \d+)+").unwrap();
 
     for mat in re.find_iter(&input) {
-        let lines: Vec<_> = mat.as_str().split("\n").collect();
+        let lines: Vec<_> = mat.as_str().split('\n').collect();
         let bitmask = &lines[0][7..];
 
         for &mem in &lines[1..] {
-            let end = mem.find("=").unwrap();
+            let end = mem.find('=').unwrap();
             let loc: usize = mem[4..end - 2].parse().unwrap();
             let decimal: usize = mem[end + 2..].parse().unwrap();
 

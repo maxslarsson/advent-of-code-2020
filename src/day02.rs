@@ -1,13 +1,13 @@
 use regex::Regex;
 
 fn setup(input: &str) -> (Vec<&str>, Regex, Regex, Regex) {
-    let input = input.split("\n").collect();
+    let input = input.split('\n').collect();
 
     let leftright = Regex::new(r"\d+-\d+").unwrap();
     let letter = Regex::new(r"[A-z]:").unwrap();
     let sequence = Regex::new(r": [A-z]*").unwrap();
 
-    return (input, leftright, letter, sequence);
+    (input, leftright, letter, sequence)
 }
 
 fn parse(
@@ -18,7 +18,7 @@ fn parse(
 ) -> (usize, usize, char, String) {
     let leftright = leftright.captures(&line).unwrap();
     let leftright: Vec<_> = leftright[0]
-        .split("-")
+        .split('-')
         .map(|x| x.parse::<usize>().unwrap())
         .collect();
     let (left, right) = (leftright[0], leftright[1]);
@@ -33,7 +33,7 @@ fn parse(
     sequence.remove(0);
     sequence.remove(0);
 
-    return (left, right, letter, sequence);
+    (left, right, letter, sequence)
 }
 
 pub fn part1(input: String) {

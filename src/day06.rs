@@ -12,7 +12,7 @@ pub fn part1(input: String) {
     for group in input {
         let mut yes = HashSet::new();
 
-        for person in group.split("\n") {
+        for person in group.split('\n') {
             for c in person.chars() {
                 yes.insert(c);
             }
@@ -30,11 +30,11 @@ pub fn part2(input: String) {
     let mut groups = Vec::new();
 
     for group in input {
-        let len = group.split("\n").count();
+        let len = group.split('\n').count();
 
         let mut yes = HashMap::new();
 
-        for person in group.split("\n") {
+        for person in group.split('\n') {
             for c in person.chars() {
                 // Default is 0 because 1 gets automatically added when it is inserted into the HashMap
                 let value = yes.get(&c).unwrap_or(&0) + 1;

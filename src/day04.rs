@@ -12,12 +12,12 @@ fn setup(input: &str) -> Vec<HashMap<&str, &str>> {
     for passport in input.split("\n\n") {
         passports.push(HashMap::new());
         for field in passport.split([' ', '\n'].as_ref()) {
-            let pair: Vec<&str> = field.split(":").collect();
+            let pair: Vec<&str> = field.split(':').collect();
             passports.last_mut().unwrap().insert(pair[0], pair[1]);
         }
     }
 
-    return passports;
+    passports
 }
 
 pub fn part1(input: String) {
@@ -26,9 +26,7 @@ pub fn part1(input: String) {
     let mut valid_passports = 0;
 
     for passport in input {
-        if passport.len() == 8 {
-            valid_passports += 1;
-        } else if passport.len() == 7 && !passport.contains_key("cid") {
+        if passport.len() == 8 || (passport.len() == 7 && !passport.contains_key("cid")) {
             valid_passports += 1;
         }
     }
@@ -55,42 +53,40 @@ pub fn part2(input: String) {
         let res = panic::catch_unwind(|| {
             let byr = passport.get("byr").unwrap().parse().unwrap();
 
-            if 1920 <= byr && byr <= 2002 {
+            if (1920..=2002).contains(&byr) {
                 let iyr = passport.get("iyr").unwrap().parse().unwrap();
 
-                if 2010 <= iyr && iyr <= 2020 {
+                if (2010..=2020).contains(&iyr) {
                     let eyr = passport.get("eyr").unwrap().parse().unwrap();
 
-                    if 2020 <= eyr && eyr <= 2030 {
+                    if (2020..=2030).contains(&eyr) {
                         let hgt = passport.get("hgt").unwrap();
                         let (hgt, units) = hgt.split_at(hgt.len() - 2);
                         let hgt = hgt.parse().unwrap();
 
-                        if (units == "cm" && 150 <= hgt && hgt <= 193)
-                            || (units == "in" && 59 <= hgt && hgt <= 76)
+                        if ((units == "cm" && 150 <= hgt && hgt <= 193)
+                            || (units == "in" && 59 <= hgt && hgt <= 76))
+                            && HEX_RE.is_match(passport.get("hcl").unwrap())
                         {
-                            if HEX_RE.is_match(passport.get("hcl").unwrap()) {
-                                let ecl = passport.get("ecl").unwrap();
+                            let ecl = passport.get("ecl").unwrap();
 
-                                if *ecl == "amb"
-                                    || *ecl == "blu"
-                                    || *ecl == "brn"
-                                    || *ecl == "gry"
-                                    || *ecl == "grn"
-                                    || *ecl == "hzl"
-                                    || *ecl == "oth"
-                                {
-                                    if NINE_RE.is_match(passport.get("pid").unwrap()) {
-                                        return 1;
-                                    }
-                                }
+                            if (*ecl == "amb"
+                                || *ecl == "blu"
+                                || *ecl == "brn"
+                                || *ecl == "gry"
+                                || *ecl == "grn"
+                                || *ecl == "hzl"
+                                || *ecl == "oth")
+                                && NINE_RE.is_match(passport.get("pid").unwrap())
+                            {
+                                return 1;
                             }
                         }
                     }
                 }
             }
 
-            return 0;
+            0
         });
 
         if let Ok(res) = res {

@@ -3,15 +3,15 @@ use std::collections::HashMap;
 fn setup(input: &str) -> Vec<(&str, isize)> {
     let mut instructions: Vec<(&str, isize)> = Vec::new();
 
-    for instruction in input.split("\n") {
-        let split: Vec<_> = instruction.split(" ").collect();
+    for instruction in input.split('\n') {
+        let split: Vec<_> = instruction.split(' ').collect();
 
         assert_eq!(split.len(), 2);
 
         instructions.push((split[0], split[1].parse().unwrap()));
     }
 
-    return instructions;
+    instructions
 }
 
 pub fn part1(input: String) {
@@ -60,7 +60,7 @@ fn recursive(
     index: isize,
     accumulator: isize,
     mut visited_indexes: HashMap<isize, usize>,
-    instructions: &Vec<(&str, isize)>,
+    instructions: &[(&str, isize)],
     changed: bool,
 ) -> isize {
     if (index as usize) == instructions.len() {
@@ -82,15 +82,15 @@ fn recursive(
     match instruction.0 {
         "nop" => {
             if changed {
-                return recursive(
+                recursive(
                     index + 1,
                     accumulator,
-                    visited_indexes.clone(),
+                    visited_indexes,
                     instructions,
                     changed,
-                );
+                )
             } else {
-                return recursive(
+                recursive(
                     index + 1,
                     accumulator,
                     visited_indexes.clone(),
@@ -99,23 +99,23 @@ fn recursive(
                 ) + recursive(
                     index + instruction.1,
                     accumulator,
-                    visited_indexes.clone(),
+                    visited_indexes,
                     instructions,
                     !changed,
-                );
+                )
             }
         }
         "jmp" => {
             if changed {
-                return recursive(
+                recursive(
                     index + instruction.1,
                     accumulator,
-                    visited_indexes.clone(),
+                    visited_indexes,
                     instructions,
                     changed,
-                );
+                )
             } else {
-                return recursive(
+                recursive(
                     index + instruction.1,
                     accumulator,
                     visited_indexes.clone(),
@@ -124,21 +124,19 @@ fn recursive(
                 ) + recursive(
                     index + 1,
                     accumulator,
-                    visited_indexes.clone(),
+                    visited_indexes,
                     instructions,
                     !changed,
-                );
+                )
             }
         }
-        "acc" => {
-            return recursive(
-                index + 1,
-                accumulator + instruction.1,
-                visited_indexes.clone(),
-                instructions,
-                changed,
-            )
-        }
+        "acc" => recursive(
+            index + 1,
+            accumulator + instruction.1,
+            visited_indexes,
+            instructions,
+            changed,
+        ),
         _ => panic!("Unknown instruction!"),
     }
 }

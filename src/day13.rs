@@ -1,8 +1,8 @@
 pub fn part1(input: String) {
-    let split: Vec<&str> = input.split("\n").collect();
+    let split: Vec<&str> = input.split('\n').collect();
     let earliest: usize = split[0].parse().unwrap();
     let buses: Vec<usize> = split[1]
-        .split(",")
+        .split(',')
         .filter_map(|bus| bus.parse().ok())
         .collect();
 
@@ -28,11 +28,11 @@ pub fn part1(input: String) {
 
 // Extremely slow: Took 269m 26s 620ms 217µs
 pub fn part2(input: String) {
-    let split: Vec<&str> = input.split("\n").collect();
+    let split: Vec<&str> = input.split('\n').collect();
     let earliest: usize = split[0].parse().unwrap();
 
     let mut iter: Vec<(usize, usize)> = split[1]
-        .split(",")
+        .split(',')
         .enumerate()
         .filter(|x| x.1 != "x")
         .map(|x| (x.0, x.1.parse().unwrap()))
