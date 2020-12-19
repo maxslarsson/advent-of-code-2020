@@ -162,7 +162,7 @@ impl Layout {
 
         // 0: columns
         // 1: rows
-        let modificiations = [
+        let modifications = [
             // Up and Left
             (-1, -1),
             // Up
@@ -181,7 +181,7 @@ impl Layout {
             (-1, 0),
         ];
 
-        for &mods in &modificiations {
+        for &mods in &modifications {
             let mut delta_row = 0;
             let mut delta_col = 0;
 
